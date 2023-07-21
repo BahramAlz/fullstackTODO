@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import AddItemForm from "./AddItemForm";
 import "./todoList.css";
 
+import { BiEdit } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+
 const BASE_URL = "http://localhost:3000/api/v1/todos/";
 
 const TodoList = () => {
@@ -70,20 +73,20 @@ const TodoList = () => {
           <h1>To Do List</h1>
         </div>
         <AddItemForm onToDoCreate={onToDoCreate} />
-        {sortedTasks?.map((item) => (
-          <li key={item.id}>
-            {item.title} {" "}
-            <button
-              className="delete-btn"
-              onClick={() => handleDelete(item.id)}
-            >
-              Delete
-            </button>
-            <button className="edit-btn" onClick={() => handleEdit(item.id)}>
-              Edit
-            </button>
-          </li>
-        ))}
+        <div className="todos">
+          {sortedTasks?.map((item) => (
+            <li key={item.id}>
+              {item.title}{" "}
+              <div className="icons">
+                <BiEdit className="icon" onClick={() => handleEdit(item.id)} />
+                <AiFillDelete
+                  className="icon"
+                  onClick={() => handleDelete(item.id)}
+                />
+              </div>
+            </li>
+          ))}
+        </div>
       </div>
     </>
   );

@@ -21,7 +21,7 @@ const AddItemForm = ({ onToDoCreate }) => {
           value={newToDo}
           type="text"
           onChange={onChange}
-          placeholder="add new to do"
+          placeholder="Run"
         />
         <button className="add-btn" type="submit" disabled={!newToDo.length}>
           Add
