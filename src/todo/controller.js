@@ -41,15 +41,16 @@ const addTodo = (req, res) => {
 };
 
 const deleteTodo = (req, res) => {
-  //id comes in as a string by defualt so we need to parse it
   const id = parseInt(req.params.id);
 
   pool.query(queries.getTodoById, [id], (error, results) => {
+    // Check if TODO ID is in the database
     const noTodoFound = !results.rows.length;
     if (noTodoFound) {
       res.send("Todo does not exist in the database.");
     }
 
+    //If the ID exists, delete it
     pool.query(queries.deleteTodo, [id], (error, results) => {
       if (error) throw error;
       res.status(200).send("Todo removed successfully.");
